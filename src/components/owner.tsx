@@ -27,7 +27,7 @@ export function Owner() {
             </p>
             <div className="mt-4 flex flex-col items-center space-y-2 md:items-start">
               <a
-                href="tel:+91821391232901"
+                href="tel:+918123363394"
                 className="flex items-center text-sm text-muted-foreground transition-colors hover:text-foreground"
               >
                 <Phone className="mr-2 h-4 w-4" />
