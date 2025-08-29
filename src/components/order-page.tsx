@@ -18,6 +18,7 @@ import * as z from 'zod';
 import {
   AlertDialog,
   AlertDialogAction,
+  AlertDialogCancel,
   AlertDialogContent,
   AlertDialogDescription,
   AlertDialogFooter,
@@ -255,7 +256,8 @@ export function OrderPage() {
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>
-            <AlertDialogAction onClick={handleReset} className="w-full">Place Another Order</AlertDialogAction>
+            <AlertDialogCancel onClick={handleReset}>Cancel</AlertDialogCancel>
+            <AlertDialogAction onClick={handleReset}>Place Another Order</AlertDialogAction>
           </AlertDialogFooter>
         </AlertDialogContent>
       </AlertDialog>

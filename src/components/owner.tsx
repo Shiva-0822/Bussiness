@@ -12,7 +12,7 @@ export function Owner() {
         <div className="mx-auto flex max-w-2xl flex-col items-center gap-8 text-center md:flex-row md:text-left">
           <div className="relative h-40 w-40 flex-shrink-0">
             <Image
-              src="/images/person.jpeg"
+              src="/images/owner.jpeg"
               alt="Shop Owner"
               width={160}
               height={160}
@@ -28,14 +28,14 @@ export function Owner() {
             <div className="mt-4 flex flex-col items-center space-y-2 md:items-start">
               <a
                 href="tel:+918123363394"
-                className="flex items-center text-sm text-muted-foreground transition-colors hover:text-foreground"
+                className="flex items-center text-sm font-bold text-foreground transition-colors hover:text-foreground/80"
               >
                 <Phone className="mr-2 h-4 w-4" />
-                +91 821391232901
+                +91 8123363394
               </a>
               <a
                 href="mailto:chandrashekar23@gmail.com"
-                className="flex items-center text-sm text-muted-foreground transition-colors hover:text-foreground"
+                className="flex items-center text-sm font-bold text-foreground transition-colors hover:text-foreground/80"
               >
                 <Mail className="mr-2 h-4 w-4" />
                 chandrashekar23@gmail.com

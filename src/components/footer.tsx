@@ -7,8 +7,8 @@ import { ShareButtons } from '@/components/share-buttons';
 export function Footer() {
   return (
     <footer className="w-full bg-purple-900 text-white">
-      <div className="container mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 py-8 text-center md:text-left">
-        <div className="flex flex-col items-center md:items-start">
+      <div className="container mx-auto flex flex-col items-center gap-8 py-8 text-center">
+        <div className="flex flex-col items-center">
           <div className="flex items-center mb-4">
             <Image src="/images/logo.png" alt="Guru Kottureshwara Shop Logo" width={40} height={40} className="h-10 w-10" />
             <span className="ml-3 text-lg font-bold">Guru Kottureshwara Shop</span>
@@ -28,8 +28,7 @@ export function Footer() {
         </div>
 
         <div>
-          <h3 className="text-lg font-semibold mb-4">Connect With Us</h3>
-          <p className="mb-2 text-sm">Share our page</p>
+          <p className="mb-2 text-sm font-semibold">Share our page</p>
           <ShareButtons />
         </div>
       </div>

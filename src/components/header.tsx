@@ -26,11 +26,11 @@ export function Header() {
           : 'bg-transparent'
       }`}
     >
-      <div className="container flex h-14 items-center">
+      <div className="container flex h-16 items-center">
         <div className="mr-4 flex items-center">
-          <Image src="/images/logo.png" alt="Guru Kottureshwara Shop Logo" width={32} height={32} className="h-8 w-8" />
+          <Image src="/images/logo.png" alt="Guru Kottureshwara Shop Logo" width={40} height={40} className="h-10 w-10" />
           <span
-            className={`ml-3 text-xs font-bold tracking-tight transition-colors ${
+            className={`ml-3 text-sm font-bold tracking-tight transition-colors ${
               isScrolled ? 'text-foreground' : 'text-white'
             }`}
           >
