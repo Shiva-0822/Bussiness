@@ -8,7 +8,7 @@ export function Hero() {
   return (
     <section className="relative -mt-16 h-[70vh] w-full">
       <Image
-        src="/images/oil.jpg."
+        src="/images/hero.jpg"
         alt="Golden sunflower oil"
         fill
         className="object-cover"
