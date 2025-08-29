@@ -12,11 +12,11 @@ import {
   Phone,
   Send,
   UserRound,
+  MessageCircle,
 } from 'lucide-react';
 import { useForm } from 'react-hook-form';
 import * as z from 'zod';
 
-import { confirmOrderInformation } from '@/ai/flows/client-notification-summarization';
 import {
   AlertDialog,
   AlertDialogAction,
@@ -36,14 +36,6 @@ import {
   CardTitle,
 } from '@/components/ui/card';
 import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-} from '@/components/ui/dialog';
-import {
   Form,
   FormControl,
   FormField,
@@ -60,7 +52,6 @@ import {
   SelectValue,
 } from '@/components/ui/select';
 import { Textarea } from '@/components/ui/textarea';
-import { useToast } from '@/hooks/use-toast';
 
 const formSchema = z.object({
   name: z.string().min(2, 'Name must be at least 2 characters.'),
@@ -81,14 +72,7 @@ type FormValues = z.infer<typeof formSchema>;
 const oilTypes = ['Olive Oil', 'Organic Coconut Oil', 'Avocado Oil'];
 
 export function OrderPage() {
-  const { toast } = useToast();
   const [isLoading, setIsLoading] = React.useState(false);
-  const [isConfirming, setIsConfirming] = React.useState(false);
-  const [summaryInfo, setSummaryInfo] = React.useState<{
-    isComplete: boolean;
-    summary: string;
-  } | null>(null);
-  const [isSummaryOpen, setIsSummaryOpen] = React.useState(false);
   const [isSuccess, setIsSuccess] = React.useState(false);
 
   const form = useForm<FormValues>({
@@ -102,43 +86,22 @@ export function OrderPage() {
     },
   });
 
-  async function onSubmit(data: FormValues) {
-    setIsLoading(true);
-    try {
-      const result = await confirmOrderInformation(data);
-      setSummaryInfo(result);
-      setIsSummaryOpen(true);
-    } catch (error) {
-      console.error('Error confirming order information:', error);
-      toast({
-        variant: 'destructive',
-        title: 'An error occurred',
-        description:
-          'We could not verify your order details. Please try again.',
-      });
-    } finally {
-      setIsLoading(false);
-    }
-  }
-  
   function generateWhatsAppLink(order: FormValues) {
     const ownerNumber = '918123363394'; // Owner WhatsApp number with country code
     const message = `New order received!%0AName: ${order.name}%0APhone: ${order.phoneNumber}%0AOil Type: ${order.oilType}%0AQuantity: ${order.quantity}L%0ADelivery Address: ${order.deliveryAddress}%0ALocation: ${order.location}`;
     return `https://wa.me/${ownerNumber}?text=${message}`;
   }
 
-  function handleConfirmOrder() {
-    setIsConfirming(true);
-    const orderData = form.getValues();
-    const whatsappUrl = generateWhatsAppLink(orderData);
+  function onSubmit(data: FormValues) {
+    setIsLoading(true);
+    const whatsappUrl = generateWhatsAppLink(data);
     window.open(whatsappUrl, '_blank');
     
     // Give a moment for the WhatsApp tab to open, then show success.
     setTimeout(() => {
-      setIsSummaryOpen(false);
       setIsSuccess(true);
-      setIsConfirming(false);
-    }, 500);
+      setIsLoading(false);
+    }, 1500);
   }
   
   function handleReset() {
@@ -277,49 +240,14 @@ export function OrderPage() {
                 {isLoading ? (
                   <Loader2 className="mr-2 h-5 w-5 animate-spin" />
                 ) : (
-                  <Send className="mr-2 h-5 w-5" />
+                  <MessageCircle className="mr-2 h-5 w-5" />
                 )}
-                Review Order
+                Place Order via WhatsApp
               </Button>
             </CardFooter>
           </form>
         </Form>
       </Card>
-
-      <Dialog open={isSummaryOpen} onOpenChange={setIsSummaryOpen}>
-        <DialogContent className="sm:max-w-md">
-          <DialogHeader>
-            <DialogTitle>Order Summary</DialogTitle>
-            <DialogDescription>
-              Please review your order details.
-            </DialogDescription>
-          </DialogHeader>
-          <div className="prose prose-sm max-w-none rounded-md border bg-muted/50 p-4 text-sm text-muted-foreground">
-             {summaryInfo?.summary.split('\n').map((line, i) => <p key={i} className="my-1">{line}</p>) ?? "Loading summary..."}
-          </div>
-          <DialogFooter className="sm:justify-between">
-            {summaryInfo?.isComplete ? (
-              <>
-                <Button variant="outline" onClick={() => setIsSummaryOpen(false)}>
-                  Edit Order
-                </Button>
-                <Button onClick={handleConfirmOrder} disabled={isConfirming} className="bg-primary hover:bg-primary/90">
-                   {isConfirming ? (
-                    <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                  ) : (
-                    <PackageCheck className="mr-2 h-4 w-4" />
-                  )}
-                  Confirm & Place Order
-                </Button>
-              </>
-            ) : (
-              <Button className="w-full" onClick={() => setIsSummaryOpen(false)}>
-                Return to Edit
-              </Button>
-            )}
-          </DialogFooter>
-        </DialogContent>
-      </Dialog>
       
       <AlertDialog open={isSuccess}>
         <AlertDialogContent>
