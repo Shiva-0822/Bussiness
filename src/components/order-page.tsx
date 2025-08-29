@@ -185,7 +185,7 @@ export function OrderPage() {
                        <div className="relative">
                         <Phone className="absolute left-3.5 top-1/2 h-5 w-5 -translate-y-1/2 text-muted-foreground" />
                         <FormControl>
-                          <Input type="tel" placeholder="(123) 456-7890" {...field} className="h-12 rounded-lg pl-12 text-base" />
+                          <Input type="tel" placeholder="8123363394" {...field} className="h-12 rounded-lg pl-12 text-base" />
                         </FormControl>
                       </div>
                       <FormMessage />
