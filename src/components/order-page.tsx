@@ -92,7 +92,7 @@ export function OrderPage() {
 
   function onSubmit(data: FormValues) {
     setIsLoading(true);
-    const ownerNumber = '8088097066'; // Owner WhatsApp number
+    const ownerNumber = '+918088097066'; // Owner WhatsApp number
     const message = `New Order from Guru Kottureshwara Shop!\n\n*Customer:* ${data.name}\n*Phone:* ${data.phoneNumber}\n\n*Product:* ${data.product}\n*Quantity:* ${data.quantity}\n\n*Address:* ${data.deliveryAddress}\n*Location:* ${data.location}`;
     const whatsappUrl = `https://wa.me/${ownerNumber}?text=${encodeURIComponent(message)}`;
     
