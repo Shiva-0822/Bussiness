@@ -3,8 +3,8 @@ import { Toaster } from '@/components/ui/toaster';
 import './globals.css';
 
 export const metadata: Metadata = {
-  title: 'OilFlow',
-  description: 'Streamlined oil delivery and order management.',
+  title: 'Guru Kottureshwara Shop',
+  description: 'Quality Freedom Oil, delivered to your door.',
 };
 
 export default function RootLayout({
