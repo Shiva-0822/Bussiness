@@ -120,16 +120,25 @@ export function OrderPage() {
       setIsLoading(false);
     }
   }
+  
+  function generateWhatsAppLink(order: FormValues) {
+    const ownerNumber = '918123363394'; // Owner WhatsApp number with country code
+    const message = `New order received!%0AName: ${order.name}%0APhone: ${order.phoneNumber}%0AOil Type: ${order.oilType}%0AQuantity: ${order.quantity}L%0ADelivery Address: ${order.deliveryAddress}%0ALocation: ${order.location}`;
+    return `https://wa.me/${ownerNumber}?text=${message}`;
+  }
 
   function handleConfirmOrder() {
     setIsConfirming(true);
-    // In a real application, you would send the data to your backend
-    // and trigger the SMS notification here.
+    const orderData = form.getValues();
+    const whatsappUrl = generateWhatsAppLink(orderData);
+    window.open(whatsappUrl, '_blank');
+    
+    // Give a moment for the WhatsApp tab to open, then show success.
     setTimeout(() => {
       setIsSummaryOpen(false);
       setIsSuccess(true);
       setIsConfirming(false);
-    }, 1500);
+    }, 500);
   }
   
   function handleReset() {
@@ -315,9 +324,9 @@ export function OrderPage() {
       <AlertDialog open={isSuccess}>
         <AlertDialogContent>
           <AlertDialogHeader>
-            <AlertDialogTitle className="text-center">Order Placed Successfully!</AlertDialogTitle>
+            <AlertDialogTitle className="text-center">Order Submitted!</AlertDialogTitle>
             <AlertDialogDescription className="text-center">
-              Thank you for your order. We have received your request and will process it shortly. You will receive a confirmation message from our team soon.
+             Your order has been sent to the owner via WhatsApp. You can now close this window or place another order.
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>
